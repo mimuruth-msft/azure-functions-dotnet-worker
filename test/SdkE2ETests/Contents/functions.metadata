@@ -1,0 +1,202 @@
+[
+  {
+    "name": "HttpTriggerSimple",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.HttpTriggerSimple.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get",
+          "post"
+        ],
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "HttpTriggerWithBlobInput",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.HttpTriggerWithBlobInput.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get",
+          "post"
+        ],
+        "properties": {}
+      },
+      {
+        "name": "myBlob",
+        "direction": "In",
+        "type": "blob",
+        "dataType": "String",
+        "blobPath": "test-samples/sample1.txt",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      },
+      {
+        "name": "Book",
+        "direction": "Out",
+        "type": "queue",
+        "queueName": "functionstesting2",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      },
+      {
+        "name": "HttpResponse",
+        "type": "http",
+        "direction": "Out"
+      }
+    ],
+    "retry": {
+      "strategy": "exponentialBackoff",
+      "maxRetryCount": 5,
+      "minimumInterval": "00:00:04",
+      "maximumInterval": "00:15:00"
+    }
+  },
+  {
+    "name": "HttpTriggerWithCancellation",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.HttpTriggerWithCancellation.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get",
+          "post"
+        ],
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "HttpTriggerWithDependencyInjection",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.HttpTriggerWithDependencyInjection.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get",
+          "post"
+        ],
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "HttpTriggerWithMultipleOutputBindings",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.HttpTriggerWithMultipleOutputBindings.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Anonymous",
+        "methods": [
+          "get",
+          "post"
+        ],
+        "properties": {}
+      },
+      {
+        "name": "Name",
+        "direction": "Out",
+        "type": "queue",
+        "dataType": "String",
+        "queueName": "functionstesting2",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      },
+      {
+        "name": "HttpResponse",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "QueueTrigger",
+    "scriptFile": "FunctionApp.dll",
+    "entryPoint": "FunctionApp.QueueTrigger.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "myQueueItem",
+        "direction": "In",
+        "type": "queueTrigger",
+        "queueName": "functionstesting2",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      },
+      {
+        "name": "myBlob",
+        "direction": "In",
+        "type": "blob",
+        "dataType": "String",
+        "blobPath": "test-samples/sample1.txt",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      }
+    ],
+    "retry": {
+      "strategy": "fixedDelay",
+      "maxRetryCount": 5,
+      "delayInterval": "00:00:10"
+    }
+  }
+]
